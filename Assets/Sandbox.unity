@@ -149,7 +149,7 @@ CharacterController:
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
-  m_SkinWidth: 0.08
+  m_SkinWidth: 0.0001
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &269736992
@@ -890,7 +890,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400038, guid: 965f0a9f646f8974198e83c87f356c53, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.1
+      value: 1.039
       objectReference: {fileID: 0}
     - target: {fileID: 400038, guid: 965f0a9f646f8974198e83c87f356c53, type: 3}
       propertyPath: m_LocalPosition.z
