@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class OrbitCamera : MonoBehaviour {
     private const float MAX_X_ROTATION = 52.0f;

@@ -1,18 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
-public class RelativeMovement : MonoBehaviour {
+public class PlayerController : MonoBehaviour {
     [SerializeField] private Transform target;
     public float rotationSpeed = 15.0f;
     public float moveSpeed = 6.0f;
-    public float jumpSpeed = 15.0f;
+    public float jumpSpeed = 18.0f;
     public float gravity = -9.8f;
     public float terminalVelocity = -10.0f;
     public float minFall = -1.5f;
 
     private float verticalSpeed;
+    private bool isRunning = false;
 
     private CharacterController characterController;
     private ControllerColliderHit contact;
@@ -25,18 +24,19 @@ public class RelativeMovement : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update () {
+    void Update() {
 
         Vector3 movement = Vector3.zero;
 
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
+        float runningInput = Input.GetAxis("Run");
 
-        if(horizontalInput != 0 || verticalInput != 0) {
-            movement.x = horizontalInput * moveSpeed;
-            movement.z = verticalInput * moveSpeed;
+        if (horizontalInput != 0 || verticalInput != 0) {
+            movement.x = horizontalInput * moveSpeed * (1 + runningInput / 2f);
+            movement.z = verticalInput * moveSpeed * (1 + runningInput / 2f);
 
-            movement = Vector3.ClampMagnitude(movement, moveSpeed);
+            movement = Vector3.ClampMagnitude(movement, moveSpeed * 1.5f);
 
             Quaternion tmp = target.rotation;
             target.eulerAngles = new Vector3(0, target.eulerAngles.y, 0);
