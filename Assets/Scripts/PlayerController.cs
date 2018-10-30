@@ -11,7 +11,6 @@ public class PlayerController : MonoBehaviour {
     public float minFall = -1.5f;
 
     private float verticalSpeed;
-    private bool isRunning = false;
 
     private CharacterController characterController;
     private ControllerColliderHit contact;
@@ -95,5 +94,9 @@ public class PlayerController : MonoBehaviour {
 
     private void OnControllerColliderHit(ControllerColliderHit hit) {
         contact = hit;
+
+        if(hit.collider.gameObject.CompareTag("Platform")) {
+            transform.SetParent(hit.collider.gameObject.transform);
+        }
     }
 }
