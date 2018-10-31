@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour {
     public float minFall = -1.5f;
 
     private float verticalSpeed;
+    private bool onPlatform;
 
     private CharacterController characterController;
     private ControllerColliderHit contact;
@@ -97,6 +98,12 @@ public class PlayerController : MonoBehaviour {
 
         if(hit.collider.gameObject.CompareTag("Platform")) {
             transform.SetParent(hit.collider.gameObject.transform);
+            onPlatform = true;
+            /* approccio possibile è settare una booleana a true e gestire la posizione in Update
+             * mettendola in relazione a quella della piattaforma,
+             * l'uso di SetParent è la scorciatoia per quest'operazione e non va bene perché scala
+             * e perché ci son problemi per togliere il Parent */
+
         }
     }
 }
