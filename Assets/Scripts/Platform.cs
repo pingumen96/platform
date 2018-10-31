@@ -2,28 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Platform : MonoBehaviour {
+public class Platform : LinearMovement {
 
-	// Use this for initialization
-	void Start () {
-		
+	new void Start () {
+        base.Start();
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		
 	}
-
-    private void OnCollisionEnter(Collision collision) {
-        Debug.Log("collisione");
-        if(collision.gameObject.CompareTag("Player")) {
-            collision.gameObject.transform.SetParent(transform);
-        }
-    }
-
-    private void OnCollisionExit(Collision collision) {
-        if(collision.gameObject.CompareTag("Player")) {
-            collision.gameObject.transform.SetParent(null);
-        }
-    }
 }

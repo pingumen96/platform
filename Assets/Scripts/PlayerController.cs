@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour {
     private CharacterController characterController;
     private ControllerColliderHit contact;
     private Animator animator;
+    private Transform currentPlatform;
 
     private void Start() {
         verticalSpeed = minFall;
@@ -25,7 +26,6 @@ public class PlayerController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-
         Vector3 movement = Vector3.zero;
 
         float horizontalInput = Input.GetAxis("Horizontal");
@@ -60,6 +60,16 @@ public class PlayerController : MonoBehaviour {
         animator.SetFloat("Speed", movement.sqrMagnitude);
 
         if(hitGround) {
+            /* innanzitutto verifichiamo se stiamo o meno sopra una piattaforma */
+            if(currentPlatform != null) {
+                if(characterController.collisionFlags == CollisionFlags.Below) {
+                    Debug.Log("collidendo");
+                } else {
+                    currentPlatform = null;
+                }
+            }
+
+
             if(Input.GetButtonDown("Jump")) {
                 verticalSpeed = jumpSpeed;
             } else {
@@ -93,17 +103,14 @@ public class PlayerController : MonoBehaviour {
         characterController.Move(movement);
 	}
 
+
     private void OnControllerColliderHit(ControllerColliderHit hit) {
         contact = hit;
 
         if(hit.collider.gameObject.CompareTag("Platform")) {
-            transform.SetParent(hit.collider.gameObject.transform);
+            //transform.SetParent(hit.collider.gameObject.transform);
             onPlatform = true;
-            /* approccio possibile è settare una booleana a true e gestire la posizione in Update
-             * mettendola in relazione a quella della piattaforma,
-             * l'uso di SetParent è la scorciatoia per quest'operazione e non va bene perché scala
-             * e perché ci son problemi per togliere il Parent */
-
+            currentPlatform = hit.collider.gameObject.transform;
         }
     }
 }

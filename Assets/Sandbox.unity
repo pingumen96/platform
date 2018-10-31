@@ -3503,7 +3503,6 @@ GameObject:
   - component: {fileID: 2018211557}
   - component: {fileID: 2018211556}
   - component: {fileID: 2018211555}
-  - component: {fileID: 2018211558}
   - component: {fileID: 2018211559}
   - component: {fileID: 2018211560}
   m_Layer: 0
@@ -3579,20 +3578,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2018211553}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &2018211558
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2018211553}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 160459d22732ee140a651080bb0c06de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  relativeMovement: {x: 0, y: 0, z: 14}
-  speed: 5
-  pauseSeconds: 2
 --- !u!114 &2018211559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3604,6 +3589,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01737c52a14eac24a84fa80431b43508, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  relativeMovement: {x: 0, y: 0, z: 14}
+  speed: 5
+  pauseSeconds: 2
 --- !u!54 &2018211560
 Rigidbody:
   m_ObjectHideFlags: 0
