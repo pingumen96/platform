@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LinearMovement : MonoBehaviour {
@@ -13,7 +12,7 @@ public class LinearMovement : MonoBehaviour {
 
 
     // Use this for initialization
-    public void Start() {
+    void Start() {
         origin = transform.position;
         destination = origin + relativeMovement;
         startTime = Time.time;

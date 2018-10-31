@@ -11,12 +11,11 @@ public class PlayerController : MonoBehaviour {
     public float minFall = -1.5f;
 
     private float verticalSpeed;
-    private bool onPlatform;
 
     private CharacterController characterController;
     private ControllerColliderHit contact;
     private Animator animator;
-    private Transform currentPlatform;
+    private Platform currentPlatform;
 
     private void Start() {
         verticalSpeed = minFall;
@@ -62,9 +61,8 @@ public class PlayerController : MonoBehaviour {
         if(hitGround) {
             /* innanzitutto verifichiamo se stiamo o meno sopra una piattaforma */
             if(currentPlatform != null) {
-                if(characterController.collisionFlags == CollisionFlags.Below) {
-                    Debug.Log("collidendo");
-                } else {
+                if(characterController.collisionFlags != CollisionFlags.Below) {
+                    currentPlatform.OnCharacterExit(transform);
                     currentPlatform = null;
                 }
             }
@@ -107,10 +105,13 @@ public class PlayerController : MonoBehaviour {
     private void OnControllerColliderHit(ControllerColliderHit hit) {
         contact = hit;
 
-        if(hit.collider.gameObject.CompareTag("Platform")) {
-            //transform.SetParent(hit.collider.gameObject.transform);
-            onPlatform = true;
-            currentPlatform = hit.collider.gameObject.transform;
+        if (hit.collider.gameObject.CompareTag("Platform")) {
+            currentPlatform = hit.collider.gameObject.GetComponent<Platform>();
+            currentPlatform.OnCharacterEnter(transform);
+        } else if (hit.collider.gameObject.CompareTag("Teleport")) {
+            hit.collider.gameObject.GetComponent<Teleport>().OnCharacterEnter(transform);
+        } else if (hit.collider.gameObject.CompareTag("Coin")) {
+            // qui si gestirà il punteggio, ecc.
         }
     }
 }
