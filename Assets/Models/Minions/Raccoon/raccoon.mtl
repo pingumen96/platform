@@ -1,0 +1,20 @@
+# Material file for raccoon.obj
+
+newmtl Tex_0392_2_dds
+	Ns 10
+	d 1
+	illum 2
+	Kd 1.0 1.0 1.0
+	Ks 0.0 0.0 0.0
+	Ka 0.588 0.588 0.588
+	map_Kd Tex_0392_2.png
+
+newmtl Tex_0404_2_dds
+	Ns 10
+	d 1
+	illum 2
+	Kd 1.0 1.0 1.0
+	Ks 0.0 0.0 0.0
+	Ka 0.588 0.588 0.588
+	map_Kd Tex_0404_2.png
+

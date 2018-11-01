@@ -102,16 +102,30 @@ public class PlayerController : MonoBehaviour {
 	}
 
 
+
+    /* Metodo responsabile per TUTTE le collisioni del giocatore */
     private void OnControllerColliderHit(ControllerColliderHit hit) {
+        GameObject gameObject = hit.collider.gameObject;
+        Collider collider = hit.collider;
         contact = hit;
 
-        if (hit.collider.gameObject.CompareTag("Platform")) {
-            currentPlatform = hit.collider.gameObject.GetComponent<Platform>();
+        if (gameObject.CompareTag("Platform")) {
+            currentPlatform = gameObject.GetComponent<Platform>();
             currentPlatform.OnCharacterEnter(transform);
-        } else if (hit.collider.gameObject.CompareTag("Teleport")) {
-            hit.collider.gameObject.GetComponent<Teleport>().OnCharacterEnter(transform);
-        } else if (hit.collider.gameObject.CompareTag("Coin")) {
+        } else if (gameObject.CompareTag("Teleport")) {
+            gameObject.GetComponent<Teleport>().OnCharacterEnter(transform);
+        } else if (gameObject.CompareTag("Coin")) {
             // qui si gestirà il punteggio, ecc.
+        } else if (gameObject.CompareTag("StompableEnemy")) {
+            Debug.Log("collisione");
+            if(Physics.CapsuleCast(gameObject.transform.position - new Vector3(collider.bounds.size.x / 2, 0.0f, collider.bounds.size.z / 2),
+                                   gameObject.transform.position + new Vector3(collider.bounds.size.x / 2, 0.0f, collider.bounds.size.z / 2),
+                                   collider.bounds.size.x / 2,
+                                   Vector3.up)) {
+                Destroy(gameObject);
+            } else {
+                /* si toglie un cuoricino al pg */
+            }
         }
     }
 }

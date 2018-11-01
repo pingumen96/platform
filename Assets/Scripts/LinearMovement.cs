@@ -5,6 +5,8 @@ public class LinearMovement : MonoBehaviour {
     [SerializeField] public Vector3 relativeMovement;
     [SerializeField] public float speed;
     [SerializeField] public float pauseSeconds;
+    [SerializeField] public bool endRotation;
+
     private Vector3 origin;
     private Vector3 destination;
     private float startTime;
@@ -26,7 +28,12 @@ public class LinearMovement : MonoBehaviour {
             yield return null;
         }
 
+        
         yield return new WaitForSeconds(pauseSeconds);
+
+        if(endRotation) {
+            transform.Rotate(new Vector3(0f, 180.0f, 0f), Space.Self);
+        }
 
         Vector3 temp = origin;
         origin = destination;
