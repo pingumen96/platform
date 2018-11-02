@@ -22,17 +22,16 @@ public class ChasingEnemy : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         RaycastHit hit;
-        
-        // TODO capire perché minchia non funziona
-        if(Physics.CapsuleCast(transform.position,
-                               transform.position,
-                               collider.bounds.size.y / 2,
+
+        // TODO ora va bene, però quando inizia a cadere va lasciato cadere sino a quando non tocca terra, forse è a causa del Lerp
+        float capsuleRadius = collider.bounds.size.x / 2;
+        if(Physics.CapsuleCast(transform.position + new Vector3(0, collider.bounds.size.y  - capsuleRadius, -collider.bounds.size.z / 2 + capsuleRadius),
+                               transform.position + new Vector3(0, collider.bounds.size.y - capsuleRadius, collider.bounds.size.z / 2 - capsuleRadius),
+                               capsuleRadius,
                                Vector3.down,
                                out hit)) {
-            //Debug.DrawRay(transform.position, Vector3.down);
-            float check = collider.bounds.size.y;
+            float check = collider.bounds.size.y - capsuleRadius * 2;
             hitGround = hit.distance <= check;
-            //Debug.DrawLine(transform.position - new Vector3(collider.bounds.size.x / 2, -0.2f, collider.bounds.size.z / 2),);
            
         }
 
