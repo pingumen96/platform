@@ -1,17 +1,9 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-/*
- VANNO GESTITE INTERFACCIA + CLASSI VARIE IN MANIERA TALE CHE I PARAMETRI POSSANO ESSERE PASSATI DALL'INSPECTOR
- https://answers.unity.com/questions/46210/how-to-expose-a-field-of-type-interface-in-the-ins.html
-     
-     */
-
-
 public class Platform : MonoBehaviour {
     private IMovement movement;
-
-    // serve per interfacciarsi col motore di Unity
+    
     private HashSet<Transform> characters;
     private Vector3 prevPosition;
     private Vector3 prevRotation;

@@ -12,10 +12,12 @@ public class NonPlayableCharacter : Character {
         base.Start();
         behaviours = GetComponents<IBehaviour>();
     }
-	
-	// Update is called once per frame
-	void Update () {
-        // si eseguono i comportamenti del NPC, uno ad uno nell'ordine in cui sono
-        behaviours[0].MovementIntent();
-	}
+
+    protected override void MovementIntent() {
+        base.MovementIntent();
+        foreach(IBehaviour b in behaviours) {
+            // si eseguono i comportamenti del NPC, uno ad uno nell'ordine in cui sono
+            b.MovementIntent();
+        }
+    }
 }

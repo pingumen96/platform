@@ -56,9 +56,7 @@ public class PlayerController : Character {
         Collider collider = hit.collider;
         //contact = hit;
 
-        if (hitObject.CompareTag("Teleport")) {
-            hitObject.GetComponent<Teleport>().OnCharacterEnter(transform);
-        } else if (hitObject.CompareTag("Coin")) {
+        if (hitObject.CompareTag("Coin") || hitObject.CompareTag("Heart")) {
             // qui si gestirà il punteggio, ecc.
         } else if (hitObject.CompareTag("StompableEnemy")) {
             Vector3 center = new Vector3(collider.bounds.size.x / 2, 0.0f, collider.bounds.size.z / 2);

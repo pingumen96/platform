@@ -18,7 +18,9 @@ public class Teleport : MonoBehaviour {
         }
     }
 
-    public void OnCharacterEnter(Transform character) {
-        this.character = character;
+    private void OnTriggerEnter(Collider other) {
+        if (other.gameObject.CompareTag("Player")) {
+            this.character = other.gameObject.transform;
+        }
     }
 }

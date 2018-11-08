@@ -47,7 +47,7 @@ public class Character : MonoBehaviour {
 
         if (verticalSpeed < 0 && Physics.Raycast(transform.position, Vector3.down, out hit)) {
             float check = (characterController.height + characterController.radius) / 1.9f;
-            isHittingGround = hit.distance <= check;
+            isHittingGround = hit.distance <= check && !hit.collider.isTrigger;
         }
 
         if (isHittingGround) {
