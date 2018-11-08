@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class LinearMovement : MonoBehaviour {
+public class LinearMovement : IMovement {
     [SerializeField] public Vector3 relativeMovement;
     [SerializeField] public float speed;
     [SerializeField] public float pauseSeconds;
@@ -14,7 +14,7 @@ public class LinearMovement : MonoBehaviour {
 
 
     // Use this for initialization
-    void Start() {
+    public override void Init() {
         origin = transform.position;
         destination = origin + relativeMovement;
         startTime = Time.time;
@@ -22,7 +22,7 @@ public class LinearMovement : MonoBehaviour {
         StartCoroutine(Move());
     }
 
-    IEnumerator Move() {
+    public override IEnumerator Move() {
         while(Vector3.Distance(transform.position, destination) > 0.01f) {
             transform.position = Vector3.Lerp(origin, destination, ((Time.time - startTime) * speed) / distance);
             yield return null;

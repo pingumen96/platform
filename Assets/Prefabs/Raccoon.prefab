@@ -54,7 +54,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4102934140478238}
   - component: {fileID: 65053747818122586}
-  - component: {fileID: 114671586028632694}
+  - component: {fileID: 114313167880178714}
+  - component: {fileID: 114094393831394722}
+  - component: {fileID: 143426231444795266}
   m_Layer: 0
   m_Name: Raccoon
   m_TagString: StompableEnemy
@@ -197,7 +199,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 7.4412823, y: 12.003831, z: 25.78432}
   m_Center: {x: 0.033898354, y: 5.5019135, z: -3.0213833}
---- !u!114 &114671586028632694
+--- !u!114 &114094393831394722
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -205,10 +207,41 @@ MonoBehaviour:
   m_GameObject: {fileID: 1814462075125114}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 160459d22732ee140a651080bb0c06de, type: 3}
+  m_Script: {fileID: 11500000, guid: b6a90490a51a73149a04925902686aef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  relativeMovement: {x: 0, y: 0, z: 0}
-  speed: 8
-  pauseSeconds: 1
-  endRotation: 1
+--- !u!114 &114313167880178714
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1814462075125114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0602f2043ee3cf947aaed3a8649d6ae0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 15
+  moveSpeed: 6
+  jumpSpeed: 18
+  gravity: -9.8
+  terminalVelocity: -10
+  minFall: -1.5
+  behaviours: []
+--- !u!143 &143426231444795266
+CharacterController:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1814462075125114}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}

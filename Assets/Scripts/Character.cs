@@ -2,18 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(CharacterController))]
 public class Character : MonoBehaviour {
-    public float rotationSpeed = 15.0f;
-    public float moveSpeed = 6.0f;
-    public float jumpSpeed = 18.0f;
-    public float gravity = -9.8f;
-    public float terminalVelocity = -10.0f;
-    public float minFall = -1.5f;
+    [SerializeField] public float rotationSpeed = 15.0f;
+    [SerializeField] public float moveSpeed = 6.0f;
+    [SerializeField] public float jumpSpeed = 18.0f;
+    [SerializeField] public float gravity = -9.8f;
+    [SerializeField] public float terminalVelocity = -10.0f;
+    [SerializeField] public float minFall = -1.5f;
 
     protected float verticalSpeed;
     protected Vector3 movement;
     protected bool isJumping = false;
-    protected bool hitGround = false;
+    protected bool isHittingGround = false;
 
     protected CharacterController characterController;
     protected ControllerColliderHit contact;
@@ -37,19 +38,19 @@ public class Character : MonoBehaviour {
     }
 
     protected virtual void MovementIntent(Vector3 direction) {
-
+        movement = Vector3.ClampMagnitude(direction, moveSpeed * 1.5f);
     }
 
     protected virtual void ReactToGravity() {
-        hitGround = false;
+        isHittingGround = false;
         RaycastHit hit;
 
         if (verticalSpeed < 0 && Physics.Raycast(transform.position, Vector3.down, out hit)) {
             float check = (characterController.height + characterController.radius) / 1.9f;
-            hitGround = hit.distance <= check;
+            isHittingGround = hit.distance <= check;
         }
 
-        if (hitGround) {
+        if (isHittingGround) {
             /* innanzitutto verifichiamo se stiamo o meno sopra una piattaforma */
             if (currentPlatform != null) {
                 if (characterController.collisionFlags != CollisionFlags.Below) {
@@ -73,7 +74,7 @@ public class Character : MonoBehaviour {
     }
 
     protected virtual void Move() {
-        if (!hitGround) {
+        if (!isHittingGround) {
             if (characterController.isGrounded) {
                 if (Vector3.Dot(movement, contact.normal) < 0) {
                     movement = contact.normal * moveSpeed;

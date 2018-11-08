@@ -21,8 +21,10 @@ GameObject:
   - component: {fileID: 4886594838056492}
   - component: {fileID: 33947936523909978}
   - component: {fileID: 23397705275080490}
-  - component: {fileID: 114531750277954962}
   - component: {fileID: 65249383685046876}
+  - component: {fileID: 114902086608632524}
+  - component: {fileID: 114356104108836478}
+  - component: {fileID: 143945758471317720}
   m_Layer: 0
   m_Name: Warbear
   m_TagString: Untagged
@@ -96,7 +98,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.2870915, y: 1.7070253, z: 2.8432586}
   m_Center: {x: -0.00002002716, y: 0.86287916, z: 0.19601619}
---- !u!114 &114531750277954962
+--- !u!114 &114356104108836478
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -104,7 +106,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 1420926654392320}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 156a0d3b75f617143b8f6b3e1a1def36, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ea3d6bd3c2640a4d80a4267f67d90b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  triggerDistance: 12
+--- !u!114 &114902086608632524
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1420926654392320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0602f2043ee3cf947aaed3a8649d6ae0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 15
@@ -113,5 +128,21 @@ MonoBehaviour:
   gravity: -9.8
   terminalVelocity: -10
   minFall: -1.5
-  target: {fileID: 0}
-  triggerDistance: 12
+  behaviours: []
+--- !u!143 &143945758471317720
+CharacterController:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1420926654392320}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 3.5474176
+  m_Radius: 1.6176455
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}

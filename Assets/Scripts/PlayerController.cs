@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(CharacterController))]
 public class PlayerController : Character {
     [SerializeField] protected Transform cameraTransform;
 
@@ -33,14 +32,13 @@ public class PlayerController : Character {
 
         // update
         animator.SetFloat("Speed", movement.sqrMagnitude);
-        animator.SetBool("Jumping", !hitGround || isJumping);
+        animator.SetBool("Jumping", !isHittingGround || isJumping);
 
         Move();
     }
 
     protected override void MovementIntent(Vector3 direction) {
         base.MovementIntent(direction);
-        movement = Vector3.ClampMagnitude(direction, moveSpeed * 1.5f);
 
         Quaternion tmp = cameraTransform.rotation;
         cameraTransform.eulerAngles = new Vector3(0, cameraTransform.eulerAngles.y, 0);
@@ -56,7 +54,7 @@ public class PlayerController : Character {
         base.OnControllerColliderHit(hit);
         GameObject hitObject = hit.collider.gameObject;
         Collider collider = hit.collider;
-        contact = hit;
+        //contact = hit;
 
         if (hitObject.CompareTag("Teleport")) {
             hitObject.GetComponent<Teleport>().OnCharacterEnter(transform);
