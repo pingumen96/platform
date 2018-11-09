@@ -1,9 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
-[RequireComponent(typeof(IBehaviour))]
 public class NonPlayableCharacter : Character {
     [SerializeField] private IBehaviour[] behaviours;
 

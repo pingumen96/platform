@@ -56,7 +56,7 @@ public class PlayerController : Character {
         Collider collider = hit.collider;
         //contact = hit;
 
-        if (hitObject.CompareTag("Coin") || hitObject.CompareTag("Heart")) {
+        if (hitObject.CompareTag("Coin")/* || hitObject.CompareTag("Heart")*/) {
             // qui si gestirà il punteggio, ecc.
         } else if (hitObject.CompareTag("StompableEnemy")) {
             Vector3 center = new Vector3(collider.bounds.size.x / 2, 0.0f, collider.bounds.size.z / 2);
