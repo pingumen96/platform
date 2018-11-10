@@ -17,6 +17,7 @@ public class ChasingBehaviour : IBehaviour {
         /* qui diremo come dovrà muoversi */
         Vector3 destination = Vector3.Distance(origin, target.transform.position) <= triggerDistance ? target.transform.position : origin;
         Vector3 velocity = destination - character.transform.position;
+        velocity.y = 0.0f;
         if (velocity.magnitude >= 0.01f) {
                 velocity.Normalize();
             velocity *= character.moveSpeed;

@@ -11,10 +11,12 @@ public class LinearMovement : IMovement {
     private Vector3 destination;
     private float startTime;
     private float distance;
+    private new Rigidbody rigidbody;
 
 
     // Use this for initialization
     public override void Init() {
+        rigidbody = GetComponent<Rigidbody>();
         origin = transform.position;
         destination = origin + relativeMovement;
         startTime = Time.time;
@@ -24,7 +26,7 @@ public class LinearMovement : IMovement {
 
     public override IEnumerator Move() {
         while(Vector3.Distance(transform.position, destination) > 0.01f) {
-            transform.position = Vector3.Lerp(origin, destination, ((Time.time - startTime) * speed) / distance);
+            rigidbody.MovePosition(Vector3.Lerp(origin, destination, ((Time.time - startTime) * speed) / distance));
             yield return null;
         }
 
@@ -32,7 +34,7 @@ public class LinearMovement : IMovement {
         yield return new WaitForSeconds(pauseSeconds);
 
         if(endRotation) {
-            transform.Rotate(new Vector3(0f, 180.0f, 0f), Space.Self);
+            rigidbody.MoveRotation(Quaternion.Euler(0f, 180.0f, 0f));
         }
 
         Vector3 temp = origin;
