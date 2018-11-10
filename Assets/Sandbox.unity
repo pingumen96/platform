@@ -6098,21 +6098,6 @@ Prefab:
       propertyPath: target
       value: 
       objectReference: {fileID: 92363610}
-    - target: {fileID: 114902086608632524, guid: ffd5106d7889a434991dbc116dc6d35e,
-        type: 2}
-      propertyPath: moveSpeed
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 114902086608632524, guid: ffd5106d7889a434991dbc116dc6d35e,
-        type: 2}
-      propertyPath: rotationSpeed
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114356104108836478, guid: ffd5106d7889a434991dbc116dc6d35e,
-        type: 2}
-      propertyPath: triggerDistance
-      value: 12
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ffd5106d7889a434991dbc116dc6d35e, type: 2}
   m_IsPrefabParent: 0
