@@ -20,7 +20,7 @@ public class Teleport : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.CompareTag("Player")) {
-            this.character = other.gameObject.transform;
+            character = other.gameObject.transform;
         }
     }
 }
