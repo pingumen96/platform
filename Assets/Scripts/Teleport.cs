@@ -8,7 +8,7 @@ public class Teleport : MonoBehaviour {
     private bool used = false;
 
     void Update() {
-        if (character != null && (!used || reusable)) {
+        if (character != null && (!used || reusable) && destination != null) {
             character.position = new Vector3(destination.transform.position.x,
                                          destination.transform.position.y + character.position.y,
                                          destination.transform.position.z);

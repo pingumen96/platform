@@ -21,17 +21,17 @@ public class Character : MonoBehaviour {
     protected Platform currentPlatform;
 
     // Use this for initialization
-    protected void Start () {
+    protected void Start() {
         verticalSpeed = minFall;
         characterController = GetComponent<CharacterController>();
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update() {
         MovementIntent();
         ReactToGravity();
         Move();
-	}
+    }
 
     protected virtual void MovementIntent() {
         MovementIntent(Vector3.zero);
@@ -43,23 +43,26 @@ public class Character : MonoBehaviour {
 
     protected virtual void ReactToGravity() {
         isHittingGround = false;
-        RaycastHit hit;
 
-        if (verticalSpeed < 0 && Physics.Raycast(transform.position, Vector3.down, out hit)) {
-            float check = (characterController.height + characterController.radius) / 1.9f;
-            isHittingGround = hit.distance <= check && !hit.collider.isTrigger;
+        if(verticalSpeed < 0) {
+            RaycastHit[] hits = Physics.RaycastAll(transform.position, Vector3.down, (characterController.height + characterController.radius) / 1.9f);
+
+            for(short i = 0; i < hits.GetLength(0) && !isHittingGround; i++) {
+                isHittingGround = !hits[i].collider.isTrigger;
+            }
         }
 
-        if (isHittingGround) {
+
+        if(isHittingGround) {
             /* innanzitutto verifichiamo se stiamo o meno sopra una piattaforma */
-            if (currentPlatform != null) {
-                if (characterController.collisionFlags != CollisionFlags.Below) {
+            if(currentPlatform != null) {
+                if(characterController.collisionFlags != CollisionFlags.Below) {
                     currentPlatform.OnCharacterExit(transform);
                     currentPlatform = null;
                 }
             }
 
-            if (isJumping) {
+            if(isJumping) {
                 verticalSpeed = jumpSpeed;
             } else {
                 //verticalSpeed = minFall;
@@ -67,16 +70,16 @@ public class Character : MonoBehaviour {
             }
         } else {
             verticalSpeed += gravity * 5 * Time.deltaTime;
-            if (verticalSpeed < terminalVelocity) {
+            if(verticalSpeed < terminalVelocity) {
                 verticalSpeed = terminalVelocity;
             }
         }
     }
 
     protected virtual void Move() {
-        if (!isHittingGround) {
-            if (characterController.isGrounded) {
-                if (Vector3.Dot(movement, contact.normal) < 0) {
+        if(!isHittingGround) {
+            if(characterController.isGrounded) {
+                if(Vector3.Dot(movement, contact.normal) < 0) {
                     movement = contact.normal * moveSpeed;
                 } else {
                     movement += contact.normal * moveSpeed;
@@ -93,7 +96,7 @@ public class Character : MonoBehaviour {
         GameObject hitObject = hit.collider.gameObject;
         contact = hit;
 
-        if (hitObject.CompareTag("Platform")) {
+        if(hitObject.CompareTag("Platform")) {
             currentPlatform = hitObject.GetComponent<Platform>();
             currentPlatform.OnCharacterEnter(transform);
         }

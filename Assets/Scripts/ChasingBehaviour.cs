@@ -18,10 +18,10 @@ public class ChasingBehaviour : IBehaviour {
         Vector3 destination = Vector3.Distance(origin, target.transform.position) <= triggerDistance ? target.transform.position : origin;
         Vector3 velocity = destination - character.transform.position;
         velocity.y = 0.0f;
-        if (velocity.magnitude >= 0.01f) {
-                velocity.Normalize();
+        if(velocity.magnitude >= 0.5f) {
+            velocity.Normalize();
             velocity *= character.moveSpeed;
-            if (velocity.magnitude > 0) {
+            if(velocity.magnitude > 0) {
                 character.transform.rotation = Quaternion.Lerp(character.transform.rotation,
                     Quaternion.Euler(new Vector3(0.0f, Mathf.Atan2(velocity.x, velocity.z) * Mathf.Rad2Deg, 0.0f)),
                     character.rotationSpeed * Time.deltaTime);
