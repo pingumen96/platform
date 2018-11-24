@@ -5,7 +5,6 @@ using UnityEngine;
 public class AIAgent : GenericAgent {
     public float maxAcceleration;
     public float maxRotation; // rappresenta in qualche modo un attrito angolare
-    //public float maxAngularAcceleration;
     public bool /*IBelieveI*/ canFly = false;
 
     public override void Update () {

@@ -433,6 +433,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 7
+  maxAngularAcceleration: 0
   orientation: 0
   rotation: 0
   velocity: {x: 0, y: 0, z: 0}
@@ -5685,6 +5686,11 @@ Prefab:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114018278855889556, guid: ffd5106d7889a434991dbc116dc6d35e,
+        type: 2}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 92363610}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ffd5106d7889a434991dbc116dc6d35e, type: 2}
   m_IsPrefabParent: 0
