@@ -5,11 +5,11 @@ using UnityEngine;
 public class Pursue : Seek {
     public float maxPrediction;
     protected GameObject targetAux;
-    private Agent targetAgent;
+    private GenericAgent targetAgent;
 
     public override void Awake() {
         base.Awake();
-        targetAgent = target.GetComponent<Agent>();
+        targetAgent = target.GetComponent<GenericAgent>();
         targetAux = target;
         target = new GameObject();
     }

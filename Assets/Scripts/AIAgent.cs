@@ -2,30 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Agent : MonoBehaviour {
-    public float maxSpeed;
+public class AIAgent : GenericAgent {
     public float maxAcceleration;
     public float maxRotation; // rappresenta in qualche modo un attrito angolare
     //public float maxAngularAcceleration;
     public bool /*IBelieveI*/ canFly = false;
-    public float orientation;
-    public float rotation;
-    public Vector3 velocity;
-    protected Steering steering;
 
-	// Use this for initialization
-	void Start () {
-        velocity = Vector3.zero;
-        steering = new Steering();
-	}
-
-    public void SetSteering(Steering steering) {
-        this.steering = steering;
-    }
-	
-	// Update is called once per frame
-	public virtual void Update () {
-        Vector3 displacement = velocity * Time.deltaTime;
+    public override void Update () {
         orientation += rotation * Time.deltaTime;
 
         // i valori di orientation devono rientrare nel range 0 - 360
@@ -34,14 +17,14 @@ public class Agent : MonoBehaviour {
         } else if(orientation > 360.0f) {
             orientation -= 360.0f;
         }
-
-        transform.Translate(displacement, Space.World);
+        
+        transform.Translate(velocity * Time.deltaTime, Space.World);
         transform.rotation = new Quaternion();
         transform.Rotate(Vector3.up, orientation);
 	}
 
     // calcoliamo lo steering per il prossimo frame
-    public virtual void LateUpdate() {
+    public override void LateUpdate() {
         velocity += steering.linear * Time.deltaTime;
         rotation += steering.angular * Time.deltaTime;
 

@@ -56,6 +56,7 @@ GameObject:
   - component: {fileID: 65053747818122586}
   - component: {fileID: 114145619793151212}
   - component: {fileID: 114094393831394722}
+  - component: {fileID: 114955380767649768}
   - component: {fileID: 143426231444795266}
   m_Layer: 0
   m_Name: Raccoon
@@ -224,11 +225,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 3
-  maxAcceleration: 10
-  maxRotation: 0
   orientation: 0
   rotation: 0
   velocity: {x: 0, y: 0, z: 0}
+  maxAcceleration: 10
+  maxRotation: 0
+  canFly: 0
+--- !u!114 &114955380767649768
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1814462075125114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0f90fae9375de9448e97b89a4508fba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 15
+  jumpSpeed: 18
+  gravity: -9.8
+  terminalVelocity: -10
+  minFall: -1.5
 --- !u!143 &143426231444795266
 CharacterController:
   m_ObjectHideFlags: 1
