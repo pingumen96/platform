@@ -12,7 +12,7 @@ public class PlayerController : Character {
 
     // Update is called once per frame
     protected override void Update() {
-        movement = Vector3.zero; // reset
+        agent.velocity = Vector3.zero; // reset
 
         // update
         float horizontalInput = Input.GetAxis("Horizontal");
@@ -23,16 +23,16 @@ public class PlayerController : Character {
         // movement intent
         if (horizontalInput != 0 || verticalInput != 0) {
             // sulla base dell'input dell'utente, si stabilisce la direzione verso la quale si vuole andare
-            movement.x = horizontalInput * moveSpeed * (1 + runningInput / 2f);
-            movement.z = verticalInput * moveSpeed * (1 + runningInput / 2f);
-            movement = Vector3.ClampMagnitude(movement, moveSpeed * 1.5f);
+            agent.velocity.x = horizontalInput * agent.maxSpeed * (1 + runningInput / 2f);
+            agent.velocity.z = verticalInput * agent.maxSpeed * (1 + runningInput / 2f);
+            agent.velocity = Vector3.ClampMagnitude(agent.velocity, agent.maxSpeed * 1.5f);
 
             Quaternion tmp = cameraTransform.rotation;
             cameraTransform.eulerAngles = new Vector3(0, cameraTransform.eulerAngles.y, 0);
-            movement = cameraTransform.TransformDirection(movement);
+            agent.velocity = cameraTransform.TransformDirection(agent.velocity);
             cameraTransform.rotation = tmp;
 
-            Quaternion characterRotation = Quaternion.LookRotation(movement);
+            Quaternion characterRotation = Quaternion.LookRotation(agent.velocity);
             transform.rotation = Quaternion.Lerp(transform.rotation, characterRotation, rotationSpeed * Time.deltaTime);
         }
 
@@ -40,7 +40,7 @@ public class PlayerController : Character {
     }
 
     protected override void Animate() {
-        animator.SetFloat("Speed", movement.sqrMagnitude);
+        animator.SetFloat("Speed", agent.velocity.sqrMagnitude);
         animator.SetBool("Jumping", !isHittingGround || isJumping);
     }
 

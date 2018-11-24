@@ -3,22 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
-[RequireComponent(typeof(Agent))]
+[RequireComponent(typeof(GenericAgent))]
 public class Character : MonoBehaviour {
     [SerializeField] public float rotationSpeed = 15.0f;
-    [SerializeField] public float moveSpeed = 6.0f;
     [SerializeField] public float jumpSpeed = 18.0f;
     [SerializeField] public float gravity = -9.8f;
     [SerializeField] public float terminalVelocity = -10.0f;
     [SerializeField] public float minFall = -1.5f;
 
     protected float verticalSpeed;
-    protected Vector3 movement;
     protected bool isJumping = false;
     protected bool isHittingGround = false;
 
     protected CharacterController characterController;
-    protected Agent agent;
+    protected GenericAgent agent;
     protected ControllerColliderHit contact;
     protected Platform currentPlatform;
 
@@ -26,7 +24,7 @@ public class Character : MonoBehaviour {
     protected virtual void Start() {
         verticalSpeed = minFall;
         characterController = GetComponent<CharacterController>();
-        agent = GetComponent<Agent>();
+        agent = GetComponent<GenericAgent>();
     }
 
     // Update is called once per frame
@@ -75,19 +73,21 @@ public class Character : MonoBehaviour {
     }
 
     protected virtual void Move() {
-        if(!isHittingGround) {
+        Vector3 velocity = agent.velocity;
+
+        if (!isHittingGround) {
             if(characterController.isGrounded) { // sono sopra qualcosa che non è terra, ad esempio, calpestando il procione
-                if(Vector3.Dot(movement, contact.normal) < 0) {
-                    movement = contact.normal * moveSpeed;
+                if(Vector3.Dot(velocity, contact.normal) < 0) {
+                    velocity = contact.normal * agent.maxSpeed;
                 } else {
-                    movement += contact.normal * moveSpeed;
+                    velocity += contact.normal * agent.maxSpeed;
                 }
             }
         }
 
-        movement.y = verticalSpeed;
-        movement *= Time.deltaTime;
-        characterController.Move(movement);
+        velocity.y = verticalSpeed;
+        velocity *= Time.deltaTime;
+        characterController.Move(velocity);
     }
 
     protected virtual void OnControllerColliderHit(ControllerColliderHit hit) {

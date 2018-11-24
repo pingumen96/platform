@@ -387,7 +387,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 15
-  moveSpeed: 7
   jumpSpeed: 18
   gravity: -9
   terminalVelocity: -10
@@ -433,9 +432,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a15a5457be97454db919448c05f8c13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 0
-  maxAcceleration: 0
-  maxRotation: 0
+  maxSpeed: 7
   orientation: 0
   rotation: 0
   velocity: {x: 0, y: 0, z: 0}
@@ -5683,6 +5680,11 @@ Prefab:
       propertyPath: target
       value: 
       objectReference: {fileID: 92363610}
+    - target: {fileID: 114208844620558026, guid: ffd5106d7889a434991dbc116dc6d35e,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ffd5106d7889a434991dbc116dc6d35e, type: 2}
   m_IsPrefabParent: 0
