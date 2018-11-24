@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(Agent))]
 public class Character : MonoBehaviour {
     [SerializeField] public float rotationSpeed = 15.0f;
     [SerializeField] public float moveSpeed = 6.0f;
@@ -17,28 +18,22 @@ public class Character : MonoBehaviour {
     protected bool isHittingGround = false;
 
     protected CharacterController characterController;
+    protected Agent agent;
     protected ControllerColliderHit contact;
     protected Platform currentPlatform;
 
     // Use this for initialization
-    protected void Start() {
+    protected virtual void Start() {
         verticalSpeed = minFall;
         characterController = GetComponent<CharacterController>();
+        agent = GetComponent<Agent>();
     }
 
     // Update is called once per frame
-    void Update() {
-        MovementIntent();
+    protected virtual void Update() {
         ReactToGravity();
+        Animate();
         Move();
-    }
-
-    protected virtual void MovementIntent() {
-        MovementIntent(Vector3.zero);
-    }
-
-    protected virtual void MovementIntent(Vector3 direction) {
-        movement = Vector3.ClampMagnitude(direction, moveSpeed * 1.5f);
     }
 
     protected virtual void ReactToGravity() {
@@ -51,7 +46,6 @@ public class Character : MonoBehaviour {
                 isHittingGround = !hits[i].collider.isTrigger;
             }
         }
-
 
         if(isHittingGround) {
             /* innanzitutto verifichiamo se stiamo o meno sopra una piattaforma */
@@ -76,9 +70,13 @@ public class Character : MonoBehaviour {
         }
     }
 
+    protected virtual void Animate() {
+
+    }
+
     protected virtual void Move() {
         if(!isHittingGround) {
-            if(characterController.isGrounded) {
+            if(characterController.isGrounded) { // sono sopra qualcosa che non è terra, ad esempio, calpestando il procione
                 if(Vector3.Dot(movement, contact.normal) < 0) {
                     movement = contact.normal * moveSpeed;
                 } else {

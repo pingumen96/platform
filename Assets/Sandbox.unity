@@ -422,6 +422,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.963988, z: 0.4}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &92363614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 92363610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a15a5457be97454db919448c05f8c13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSpeed: 0
+  maxAcceleration: 0
+  maxRotation: 0
+  orientation: 0
+  rotation: 0
+  velocity: {x: 0, y: 0, z: 0}
 --- !u!1 &100235171
 GameObject:
   m_ObjectHideFlags: 0
@@ -5648,6 +5665,20 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 92363610}
+    - target: {fileID: 114049162646047082, guid: ffd5106d7889a434991dbc116dc6d35e,
+        type: 2}
+      propertyPath: triggerRadius
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 114049162646047082, guid: ffd5106d7889a434991dbc116dc6d35e,
+        type: 2}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 92363610}
     - target: {fileID: 0}
       propertyPath: target
       value: 

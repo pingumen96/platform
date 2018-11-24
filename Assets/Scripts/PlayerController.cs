@@ -5,13 +5,13 @@ public class PlayerController : Character {
 
     private Animator animator;
 
-    new void Start() {
+    protected override void Start() {
         base.Start();
         animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
-    void Update() {
+    protected override void Update() {
         movement = Vector3.zero; // reset
 
         // update
@@ -23,30 +23,25 @@ public class PlayerController : Character {
         // movement intent
         if (horizontalInput != 0 || verticalInput != 0) {
             // sulla base dell'input dell'utente, si stabilisce la direzione verso la quale si vuole andare
-            MovementIntent(new Vector3(horizontalInput * moveSpeed * (1 + runningInput / 2f),
-                                       movement.y,
-                                       verticalInput * moveSpeed * (1 + runningInput / 2f)));
+            movement.x = horizontalInput * moveSpeed * (1 + runningInput / 2f);
+            movement.z = verticalInput * moveSpeed * (1 + runningInput / 2f);
+            movement = Vector3.ClampMagnitude(movement, moveSpeed * 1.5f);
+
+            Quaternion tmp = cameraTransform.rotation;
+            cameraTransform.eulerAngles = new Vector3(0, cameraTransform.eulerAngles.y, 0);
+            movement = cameraTransform.TransformDirection(movement);
+            cameraTransform.rotation = tmp;
+
+            Quaternion characterRotation = Quaternion.LookRotation(movement);
+            transform.rotation = Quaternion.Lerp(transform.rotation, characterRotation, rotationSpeed * Time.deltaTime);
         }
 
-        ReactToGravity();
-
-        // update
-        animator.SetFloat("Speed", movement.sqrMagnitude);
-        animator.SetBool("Jumping", !isHittingGround || isJumping);
-
-        Move();
+        base.Update();
     }
 
-    protected override void MovementIntent(Vector3 direction) {
-        base.MovementIntent(direction);
-
-        Quaternion tmp = cameraTransform.rotation;
-        cameraTransform.eulerAngles = new Vector3(0, cameraTransform.eulerAngles.y, 0);
-        movement = cameraTransform.TransformDirection(movement);
-        cameraTransform.rotation = tmp;
-
-        Quaternion characterRotation = Quaternion.LookRotation(movement);
-        transform.rotation = Quaternion.Lerp(transform.rotation, characterRotation, rotationSpeed * Time.deltaTime);
+    protected override void Animate() {
+        animator.SetFloat("Speed", movement.sqrMagnitude);
+        animator.SetBool("Jumping", !isHittingGround || isJumping);
     }
 
     /* Metodo responsabile per TUTTE le collisioni del giocatore */
