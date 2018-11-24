@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Pursue : Seek {
     public float maxPrediction;
-    private GameObject targetAux;
+    protected GameObject targetAux;
     private Agent targetAgent;
 
     public override void Awake() {
