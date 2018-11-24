@@ -22,9 +22,10 @@ GameObject:
   - component: {fileID: 33947936523909978}
   - component: {fileID: 23397705275080490}
   - component: {fileID: 65249383685046876}
+  - component: {fileID: 114208844620558026}
   - component: {fileID: 114352001630611622}
   - component: {fileID: 114049162646047082}
-  - component: {fileID: 114208844620558026}
+  - component: {fileID: 114018278855889556}
   - component: {fileID: 143945758471317720}
   m_Layer: 0
   m_Name: Warbear
@@ -99,6 +100,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.2870915, y: 1.7070253, z: 2.8432586}
   m_Center: {x: -0.00002002716, y: 0.86287916, z: 0.19601619}
+--- !u!114 &114018278855889556
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1420926654392320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ed75a62685688d45888494cf29852a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weight: 1
+  target: {fileID: 0}
+  targetRadius: 1
+  slowRadius: 0
+  timeToTarget: 0.1
 --- !u!114 &114049162646047082
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -110,6 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cab84d6c98878d4393c334ce2bedd8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weight: 1
   target: {fileID: 0}
   maxPrediction: 1
   triggerRadius: 0
@@ -140,12 +158,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2708a25402915b49bcdf1a1b1d8774a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 2
+  maxSpeed: 0.8
+  maxAngularAcceleration: 1000
   orientation: 0
   rotation: 0
   velocity: {x: 0, y: 0, z: 0}
   maxAcceleration: 10
-  maxRotation: 0
+  maxRotation: 50
   canFly: 0
 --- !u!143 &143945758471317720
 CharacterController:

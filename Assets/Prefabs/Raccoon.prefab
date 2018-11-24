@@ -54,9 +54,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4102934140478238}
   - component: {fileID: 65053747818122586}
+  - component: {fileID: 114955380767649768}
   - component: {fileID: 114145619793151212}
   - component: {fileID: 114094393831394722}
-  - component: {fileID: 114955380767649768}
+  - component: {fileID: 114323783335593178}
   - component: {fileID: 143426231444795266}
   m_Layer: 0
   m_Name: Raccoon
@@ -211,6 +212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6a90490a51a73149a04925902686aef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weight: 1
   target: {fileID: 0}
   distance: {x: 12, y: 0, z: 0}
 --- !u!114 &114145619793151212
@@ -225,12 +227,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 3
+  maxAngularAcceleration: 10000
   orientation: 0
   rotation: 0
   velocity: {x: 0, y: 0, z: 0}
   maxAcceleration: 10
-  maxRotation: 0
+  maxRotation: 500
   canFly: 0
+--- !u!114 &114323783335593178
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1814462075125114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 565c983366ffe134490db7c2b1df281f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weight: 1
+  target: {fileID: 0}
+  targetRadius: 10
+  slowRadius: 0
+  timeToTarget: 0.1
 --- !u!114 &114955380767649768
 MonoBehaviour:
   m_ObjectHideFlags: 1
