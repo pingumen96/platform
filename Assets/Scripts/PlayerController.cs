@@ -18,7 +18,7 @@ public class PlayerController : Character {
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
         float runningInput = Input.GetAxis("Run");
-        isJumping = Input.GetButton("Jump");
+        isJumping = Input.GetButtonDown("Jump");
 
         // movement intent
         if (horizontalInput != 0 || verticalInput != 0) {
