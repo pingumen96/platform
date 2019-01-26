@@ -1,6 +1,14 @@
 ﻿using UnityEngine;
 
 public class PlayerController : Character {
+    public byte coinsPerLife = 50;
+    public byte initialLives = 3;
+    private byte coins;
+    private byte lives;
+
+    private bool gameOver;
+    
+
     [SerializeField] protected Transform cameraTransform;
 
     private Animator animator;
@@ -8,6 +16,9 @@ public class PlayerController : Character {
     protected override void Start() {
         base.Start();
         animator = GetComponent<Animator>();
+
+        coins = 0;
+        lives = initialLives;
     }
 
     // Update is called once per frame
@@ -44,23 +55,57 @@ public class PlayerController : Character {
         animator.SetBool("Jumping", !isHittingGround || isJumping);
     }
 
+    private void AddLife() {
+        if(lives + 1 != byte.MaxValue) {
+            lives++;
+        }
+
+        Debug.Log("Lives: " + lives);
+    }
+
+    private void SubtractLife() {
+        lives--;
+
+        if(lives == 0) {
+            gameOver = true;
+        }
+    }
+
+    private void AddCoin() {
+        coins++;
+
+        if(coins % coinsPerLife == 0) {
+            AddLife();
+        }
+
+        Debug.Log("Coins: " + coins);
+    }
+
     /* Metodo responsabile per TUTTE le collisioni del giocatore */
     protected override void OnControllerColliderHit(ControllerColliderHit hit) {
         base.OnControllerColliderHit(hit);
         GameObject hitObject = hit.collider.gameObject;
         Collider collider = hit.collider;
-        //contact = hit;
 
-        if (hitObject.CompareTag("Coin")/* || hitObject.CompareTag("Heart")*/) {
-            // qui si gestirà il punteggio, ecc.
-        } else if (hitObject.CompareTag("StompableEnemy")) {
+        if (hitObject.CompareTag("StompableEnemy")) {
             Vector3 center = new Vector3(collider.bounds.size.x / 2, 0.0f, collider.bounds.size.z / 2);
             if (Physics.CapsuleCast(hitObject.transform.position - center, hitObject.transform.position + center,
                                     collider.bounds.size.x / 2, Vector3.up)) {
                 Destroy(hitObject);
             } else {
                 /* si toglie un cuoricino al pg */
+                SubtractLife();
             }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        GameObject hitObject = other.gameObject;
+
+        if(hitObject.CompareTag("Heart")) {
+            AddLife();
+        } else if(hitObject.CompareTag("Coin")) {
+            AddCoin();
         }
     }
 }
